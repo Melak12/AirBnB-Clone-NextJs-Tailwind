@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .mChip {
+        @apply px-4 py-2 border rounded-full cursor-pointer 
+        hover:shadow-lg active:scale-95 duration-100 ease-out
+        active:bg-gray-100
+    }
+}

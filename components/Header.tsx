@@ -5,14 +5,20 @@ import { UsersIcon, MagnifyingGlassIcon, GlobeAltIcon, Bars3Icon, UserCircleIcon
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRangePicker } from 'react-date-range';
+import { useRouter } from 'next/router';
 
-type Props = {}
+type Props = {
+    placeholder?: string
+}
 
-export default function Header({ }: Props) {
+export default function Header({ placeholder}: Props) {
     const [searchInput, setSearchInput] = useState("");
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [numberOfGuests, setNumberOfGuests] = useState(1);
+    
+    const router = useRouter();
+    
     const selectionRange = {
         startDate: startDate,
         endDate: endDate,
@@ -26,6 +32,18 @@ export default function Header({ }: Props) {
         setEndDate(ranges.selection.endDate);
     }
 
+    const handleSearch = () => {
+        router.push({
+            pathname: '/search',
+            query: {
+                location: searchInput,
+                startDate: startDate.toISOString(),
+                endDate: endDate.toISOString(),
+                numberOfGuests
+            }
+        });
+    }
+
     const resetSearch = () => {
         setSearchInput("");
         setStartDate(new Date());
@@ -36,7 +54,7 @@ export default function Header({ }: Props) {
     return (
         <header className='sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-5'>
             {/* Left */}
-            <div className='relative flex h-10 items-center cursor-pointer my-auto'>
+            <div onClick={() => router.push('/')} className='relative flex h-10 items-center cursor-pointer my-auto'>
                 <Image
                     src='https://links.papareact.com/qd3'
                     alt='AirBnB Logo'
@@ -56,7 +74,7 @@ export default function Header({ }: Props) {
                     className='flex-grow pl-5 bg-transparent outline-none first-letter 
                     text-xs text-gray-600 placeholder-gray-400'
                     type='text'
-                    placeholder='Start your search'
+                    placeholder= {placeholder || 'Start your search'}
                 />
                 <MagnifyingGlassIcon className=' hidden lg:inline-flex lg:mx-2 h-8 bg-red-400
              text-white p-2 rounded-full cursor-pointer'/>
@@ -96,7 +114,7 @@ export default function Header({ }: Props) {
                             Cancel
                         </button>
 
-                        <button className='text-red-400'>
+                        <button onClick={handleSearch} className='text-red-400'>
                             Search
                         </button>
                     </div>
