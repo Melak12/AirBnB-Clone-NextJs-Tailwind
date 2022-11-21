@@ -1,11 +1,14 @@
 import { format } from 'date-fns';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react'
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import InfoCard from '../components/InfoCard';
+import { Room } from '../typings';
 
 
-const Search = () => {
+const Search = ({ searchResult }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
     const router = useRouter();
 
@@ -32,6 +35,13 @@ const Search = () => {
                         <p className='mChip'>Rooms and Beds</p>
                         <p className='mChip'>More filters</p>
                     </div>
+
+                    {/* Search Result */}
+                    {
+                        searchResult?.map((item) => (
+                            <InfoCard room={item} key={item.img}/>
+                        ))
+                    }
                 </section>
             </main>
 
@@ -40,5 +50,18 @@ const Search = () => {
 
     )
 }
+
+export const getServerSideProps: GetServerSideProps<{ searchResult: Room[]}> = async (
+    context
+  ) => {
+    const roomsData = await fetch('https://www.jsonkeeper.com/b/5NPS');
+    const searchResult: Room[] = await roomsData.json();
+  
+    return {
+      props: {
+        searchResult
+      },
+    }
+  }
 
 export default Search;
