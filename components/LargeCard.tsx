@@ -13,7 +13,9 @@ function LargeCard({ img, title, description, buttonText }: Props) {
         <section className='relative py-16 cursor-pointer'>
 
             <div className='relative h-96 min-w-[300px]'>
-                <Image src={img} alt="Featured Image" fill className='rounded-2xl'/>
+                <Image src={img} alt="Featured Image" fill className='rounded-2xl' style={{
+                    objectFit: 'cover'
+                }}/>
             </div>
 
             <div className='absolute top-32 left-12'>
