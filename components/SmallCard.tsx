@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import React from 'react'
-import { NearbyRoom } from '../typings'
+import { Room } from '../typings'
+
 
 type Props = {
-    room: NearbyRoom
+    room: Room
 }
 
 export default function SmallCard({room}: Props) {
