@@ -8,6 +8,7 @@ import SmallCard from '../components/SmallCard'
 import { Room } from '../typings'
 import MediumCard from '../components/MediumCard'
 import LargeCard from '../components/LargeCard'
+import Footer from '../components/Footer'
 
 
 
@@ -68,6 +69,7 @@ function Home({ nearbyRooms, anywhereRooms }: InferGetStaticPropsType<typeof get
       </main>
 
       {/* Footer */}
+      <Footer />
 
     </div>
   )
