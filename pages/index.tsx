@@ -19,6 +19,7 @@ function Home({ nearbyRooms, anywhereRooms }: InferGetStaticPropsType<typeof get
         <title>AirBnB Reimagined</title>
         <meta name="description" content="Next js Typescript based AirBnB Clone" />
         <link rel="icon" href="/favicon.ico" />
+        
       </Head>
 
       {/* Head */}
