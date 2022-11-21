@@ -7,6 +7,7 @@ import { InferGetStaticPropsType } from 'next'
 import SmallCard from '../components/SmallCard'
 import { Room } from '../typings'
 import MediumCard from '../components/MediumCard'
+import LargeCard from '../components/LargeCard'
 
 
 
@@ -55,6 +56,15 @@ function Home({ nearbyRooms, anywhereRooms }: InferGetStaticPropsType<typeof get
           </div>
           </>
         </section>
+
+        {/* Large Card */}
+        <LargeCard 
+        img={'https://links.papareact.com/4cj'} 
+        title='The Greatest Ouutdoors'
+        description="Wishlists curated by Airbnb."
+        buttonText="Get Inspired"
+        
+        />
       </main>
 
       {/* Footer */}
